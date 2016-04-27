@@ -29,11 +29,17 @@ randomPuppy()
 
 ### randomPuppy()
 
-Returns a random puppy image from http://imgur.com/ from https://www.reddit.com/r/puppy
+Returns a `promise` for a random puppy image url from http://imgur.com/ from https://www.reddit.com/r/puppy
 
 ### randomPuppy(subreddit)
 
-Returns a random image from the selected subreddit. Warning: We cannot promise it will be a puppy.
+Returns a `promise` for a random image url from the selected subreddit. *Warning: We cannot promise it will be a image of a puppy!*
+
+## Notes
+
+* Node 4 or newer.
+* Caches results from imgur in memory.
+* Created for the purpose of using in a training exercise on different ways to do async in JavaScript at [Opower](https://opower.com/).
 
 ## License
 
