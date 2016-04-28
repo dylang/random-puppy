@@ -1,6 +1,6 @@
 {
   "name": "random-puppy",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Get a random puppy image url.",
   "license": "MIT",
   "repository": "dylang/random-puppy",
@@ -19,7 +19,12 @@
     "index.js"
   ],
   "keywords": [
-    "puppy", "doggie", "dog", "imgur", "random", "placeholder"
+    "puppy",
+    "doggie",
+    "dog",
+    "imgur",
+    "random",
+    "placeholder"
   ],
   "dependencies": {
     "got": "^6.3.0",

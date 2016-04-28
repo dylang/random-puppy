@@ -8,6 +8,24 @@ test('get random', async t => {
     t.regex(result, imgurRegEx);
 });
 
+test.cb('use callback', t => {
+    t.plan(2);
+    randomPuppy((err, result) => {
+        t.falsy(err);
+        t.regex(result, imgurRegEx);
+        t.end();
+    });
+});
+
+test.cb('use callback and different subreddit', t => {
+    t.plan(2);
+    randomPuppy('aww', (err, result) => {
+        t.falsy(err);
+        t.regex(result, imgurRegEx);
+        t.end();
+    });
+});
+
 test('get more random', async t => {
     const result1 = await randomPuppy();
     t.regex(result1, imgurRegEx);
