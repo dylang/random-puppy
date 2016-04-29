@@ -2,6 +2,7 @@
 
 const got = require('got');
 const uniqueRandomArray = require('unique-random-array');
+const EventEmitter = require('eventemitter3');
 
 const randomCache = {};
 
@@ -32,6 +33,23 @@ function randomPuppy(subreddit) {
         .then(getRandomImage => formatResult(getRandomImage));
 }
 
+// silly feature to play with observables
+function all(subreddit) {
+    const eventEmitter = new EventEmitter();
+
+    function emitRandomImage(subreddit) {
+        randomPuppy(subreddit).then(imageUrl => {
+            eventEmitter.emit('data', imageUrl + '#' + subreddit);
+            if (eventEmitter.listeners('data').length) {
+                setTimeout(() => emitRandomImage(subreddit), 200);
+            }
+        });
+    }
+
+    emitRandomImage(subreddit);
+    return eventEmitter;
+}
+
 function callback(subreddit, cb) {
     randomPuppy(subreddit)
         .then(url => cb(null, url))
@@ -49,3 +67,5 @@ module.exports = (subreddit, cb) => {
         return randomPuppy(subreddit);
     }
 };
+
+module.exports.all = all;

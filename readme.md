@@ -27,13 +27,32 @@ randomPuppy()
 
 ## API
 
-### randomPuppy()
+### `randomPuppy()`
 
 Returns a `promise` for a random puppy image url from http://imgur.com/ from https://www.reddit.com/r/puppy
 
-### randomPuppy(subreddit)
+### `randomPuppy(subreddit)`
 
 Returns a `promise` for a random image url from the selected subreddit. *Warning: We cannot promise it will be a image of a puppy!*
+
+### `randomPuppy.all(subreddit)`
+
+Returns an `eventemitter` for getting all random images for a subreddit.
+
+```js
+const event = randomPuppy.all(subreddit);
+event.on('data', url => console.log(url));
+```
+
+Or:
+```js
+const event = randomPuppy.all('puppies');
+
+Observable.fromEvent(event, 'data')
+    .subscribe(data => {
+      console.log(data);
+    });
+```
 
 ## Notes
 

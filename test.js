@@ -1,7 +1,8 @@
 import test from 'ava';
+import {Observable} from 'rx-lite';
 import randomPuppy from './';
 
-const imgurRegEx = /^https?:\/\/(\w+\.)?imgur.com\/[a-zA-Z0-9]+(\.[a-zA-Z]{3})?$/;
+const imgurRegEx = /^https?:\/\/(\w+\.)?imgur.com\/[a-zA-Z0-9]+(\.[a-zA-Z]{3})?(#[a-zA-Z]*)?$/;
 
 test('get random', async t => {
     const result = await randomPuppy();
@@ -57,4 +58,23 @@ test('invalid subreddit', async t => {
     t.regex(result3, imgurRegEx);
     const result4 = await randomPuppy(false);
     t.regex(result4, imgurRegEx);
+});
+
+test('all', t => {
+    t.plan(10);
+    const puppyEmitter = randomPuppy.all('puppies');
+    const robotEmitter = randomPuppy.all('robots');
+
+    const puppySource = Observable.fromEvent(puppyEmitter, 'data');
+    const robotSource = Observable.fromEvent(robotEmitter, 'data');
+
+    const sharedSource = Observable
+        .merge(puppySource, robotSource)
+        .take(10);
+
+    sharedSource.subscribe(data => {
+        t.regex(data, imgurRegEx);
+        // console.log(data);
+    });
+    return sharedSource.toPromise();
 });

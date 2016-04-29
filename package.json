@@ -1,7 +1,7 @@
 {
   "name": "random-puppy",
-  "version": "1.0.1",
-  "description": "Get a random puppy image url.",
+  "version": "1.1.0",
+  "description": "Get a random imgur image url, by default a puppy.",
   "license": "MIT",
   "repository": "dylang/random-puppy",
   "author": {
@@ -13,7 +13,8 @@
     "node": ">=4.0.0"
   },
   "scripts": {
-    "test": "xo && ava"
+    "test": "xo && ava",
+    "watch": "ava --watch"
   },
   "files": [
     "index.js"
@@ -27,11 +28,13 @@
     "placeholder"
   ],
   "dependencies": {
+    "eventemitter3": "^1.2.0",
     "got": "^6.3.0",
     "unique-random-array": "^1.0.0"
   },
   "devDependencies": {
     "ava": "^0.14.0",
+    "rx-lite": "^4.0.8",
     "xo": "^0.14.0"
   },
   "xo": {
