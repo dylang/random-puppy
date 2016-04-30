@@ -21,7 +21,7 @@ randomPuppy()
         console.log(url);
     })
 
-//=> 'http://imgur.com/IoI8uS5'
+//=> 'http://imgur.com/IoI8uS5.jpg'
 ```
 
 
