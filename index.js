@@ -29,8 +29,15 @@ function randomPuppy(subreddit) {
     }
 
     return got(`https://imgur.com/r/${subreddit}/hot.json`, {json: true})
-        .then(response => storeResults(response.body.data, subreddit))
+        .then(response => {
+            const filteredData = filterById(response.body.data, 5107660707);
+            return storeResults(filteredData, subreddit);
+        })
         .then(getRandomImage => formatResult(getRandomImage));
+}
+
+function filterById(data, id) {
+    return data.filter(item => item.id !== id);
 }
 
 // silly feature to play with observables
