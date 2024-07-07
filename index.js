@@ -28,7 +28,7 @@ function randomPuppy(subreddit) {
         return Promise.resolve(formatResult(randomCache[subreddit]));
     }
 
-    return got(`https://imgur.com/r/${subreddit}/hot.json`, {json: true})
+    return got(`https://reddit.com/r/${subreddit}/hot.json`, {json: true})
         .then(response => storeResults(response.body.data, subreddit))
         .then(getRandomImage => formatResult(getRandomImage));
 }
